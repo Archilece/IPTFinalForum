@@ -1,0 +1,41 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<div class="forum-detail">
+    <div class="forum">
+        <h2>{{ forum.title }}</h2>
+        <p>{{ forum.body }}</p>
+        <p>{{ forum.date }}</p>
+        <p>Created By:{{ forum.author }}</p>
+    </div> 
+</div>
+
+<div class="topic-block">
+<h2>Related Topics:</h2>
+<ul>
+  {% for topic in forum.topic_set.all %}
+    <h1>{{ topic.ttitle }}</h1>
+    <p>{{ topic.tbody }}</p>
+    <p>Created By:{{ topic.tauthor }}</p>
+    
+    <ul>
+      {% for comment in topic.comments.all %}
+        <li>
+          <p>{{ comment.cbody }}</p>
+          <p>Created By:{{ comment.cauthor }}</p>
+        </li>
+      {% empty %}
+        <li>No comments yet.</li>
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'forums:add_comment' forum_id=forum.id topic_id=topic.id %}">Add Comment</a>
+    
+  {% empty %}
+    <li>No topics found.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'forums:create_topic' forum_id=forum.id %}">Create Topic</a>
+</div>
+{% endblock %}

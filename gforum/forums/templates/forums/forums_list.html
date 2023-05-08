@@ -1,0 +1,14 @@
+{% extends 'base_layout.html'%}
+{% block content %}
+    <h1>Available Forums</h1>
+    <div class = "forums">
+        {%for forum in forums%}
+            <div class="forum">
+                <h2><a href = "{% url 'forums:detail' forum.id %}">{{forum.title}}</a></h2>  
+                <p>{{forum.snippet}}</p>
+                <p>{{forum.date}}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+

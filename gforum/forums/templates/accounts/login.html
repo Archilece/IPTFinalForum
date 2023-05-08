@@ -1,0 +1,16 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <h1>LOGIN USER</h1>
+    <form class="site-form" action="{% url 'forums:login' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}" />
+        {% endif %}
+        <input type="submit" value="Login">
+    </form>
+    <p>Not got an account? <a href="{% url 'forums:signup' %}">Sign Up</a></p>
+
+
+{% endblock %}
