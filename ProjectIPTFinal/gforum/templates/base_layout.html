@@ -1,0 +1,33 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forums</title>
+    <link rel = "stylesheet" href = "{% static 'style.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <h1><a href="{% url 'forums:list'%}" class="logo"><img src="{% static 'logo.png' %}" ></a></h1>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                <li>
+                    <form class="logout-link" action="{% url 'forums:logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-button">Logout</button>
+                    </form>
+                </li>
+                {% else %}
+                <li><a href="{% url 'forums:login' %}" class="signin">Sign In</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

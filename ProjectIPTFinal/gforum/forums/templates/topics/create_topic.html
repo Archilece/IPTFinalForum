@@ -1,0 +1,12 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+  <div class="topic-create">
+  <h2>Create Topic</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="topic-submit">Create</button>
+  </form>
+  </div>
+{% endblock %}
